@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_impuestos
+    restart: always
+    environment:
+      POSTGRES_USER: admin_impuestos
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: gestion-impuestos
+    ports:
+      - '5433:5432' # <--- IMPORTANTE: Usamos el 5433 para que no choque con tu otra base
+    volumes:
+      - pgdata_impuestos:/var/lib/postgresql/data
+
+volumes:
+  pgdata_impuestos:
