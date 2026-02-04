@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
-import usePatentes from '@/hooks/usePatentes';
-import { useRouter } from 'next/navigation';
+import { useForm } from "react-hook-form";
+import usePatentes from "@/hooks/usePatentes";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   name: string;
@@ -22,7 +22,7 @@ export default function PatenteForm() {
     createMutation.mutate(data, {
       onSuccess: () => {
         // Después de crearla con éxito, volvemos a la lista sola
-        router.push('/patentes');
+        router.push("/patentes");
       },
     });
   };
@@ -34,7 +34,7 @@ export default function PatenteForm() {
           Nombre del Vehículo (Ej: Hilux)
         </label>
         <input
-          {...register('name', { required: 'El nombre es obligatorio' })}
+          {...register("name", { required: "El nombre es obligatorio" })}
           className="w-full p-3 rounded-lg border border-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
           placeholder="Ej: Toyota Hilux"
         />
@@ -48,11 +48,11 @@ export default function PatenteForm() {
           Dominio / Patente
         </label>
         <input
-          {...register('dominio', {
-            required: 'La patente es obligatoria',
+          {...register("dominio", {
+            required: "La patente es obligatoria",
             pattern: {
               value: /^[A-Z0-9\s]+$/i,
-              message: 'Formato de patente no válido',
+              message: "Formato de patente no válido",
             },
           })}
           className="w-full p-3 rounded-lg border border-gray-500 focus:ring-2 focus:ring-blue-500 outline-none uppercase"
@@ -66,9 +66,9 @@ export default function PatenteForm() {
       <button
         type="submit"
         disabled={createMutation.isPending}
-        className="w-full bg-zinc-900 text-white py-3 rounded-lg font-bold hover:bg-black transition disabled:opacity-50"
+        className="w-full cursor-pointer text-xl bg-zinc-900 text-white py-3 rounded-lg font-bold hover:bg-black transition disabled:opacity-50"
       >
-        {createMutation.isPending ? 'Guardando...' : 'Registrar Vehículo'}
+        {createMutation.isPending ? "Guardando..." : "Registrar Vehículo"}
       </button>
     </form>
   );

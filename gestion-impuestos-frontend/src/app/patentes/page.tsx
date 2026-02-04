@@ -1,68 +1,32 @@
-'use client';
+"use client";
 
-import usePatentes from '@/hooks/usePatentes';
-import Link from 'next/link';
+import Link from "next/link";
+import usePatentes from "@/hooks/usePatentes";
 
-export default function PatentesPage() {
+export default function page() {
   const { patentesQuery, deleteMutation } = usePatentes();
   const { data: patentes, isLoading, isError } = patentesQuery;
 
-  const handleEliminar = (id: string) => {
-    if (confirm('¿Estás seguro de que querés eliminar esta patente?')) {
-      deleteMutation.mutate(id);
-    }
-  };
-
-  if (isLoading) return <div className="p-10 text-center">Cargando...</div>;
-  if (isError)
-    return (
-      <div className="p-10 text-center text-red-500">
-        Error al conectar con la API de NestJS.
-      </div>
-    );
-
   return (
-    <div className="max-w-5xl mx-auto py-8">
-      <header className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Mis Vehículos</h1>
+    <div>
+      <div className="flex flex-col gap-4 items-center">
+        <h1 className="text-4xl">Patentes</h1>
         <Link
           href="/patentes/nuevo"
-          className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          className="cursor-pointer w-full text-center text-2xl text-white bg-blue-700 px-4 py-2 rounded-md"
         >
-          + Agregar Patente
+          Agregar Patente
         </Link>
-      </header>
+      </div>
 
-      <div className="grid gap-4">
-        {Array.isArray(patentes) && patentes.length > 0 ? (
-          patentes.map((p) => (
-            <div
-              key={p._id}
-              className="bg-white p-5 rounded-xl border flex justify-between items-center shadow-sm"
-            >
-              <div>
-                <p className="text-xs text-zinc-400 font-mono mb-1">
-                  ID: {p._id}
-                </p>
-                <h3 className="text-2xl font-bold uppercase tracking-widest">
-                  {p.dominio}
-                </h3>
-                <p className="text-zinc-600">{p.name}</p>
-              </div>
-              <button
-                onClick={() => handleEliminar(p._id)}
-                disabled={deleteMutation.isPending}
-                className="text-red-500 hover:bg-red-50 p-2 rounded-md transition"
-              >
-                {deleteMutation.isPending ? 'Borrando...' : 'Eliminar'}
-              </button>
-            </div>
-          ))
-        ) : (
-          <p className="text-center py-20 text-zinc-500 border-2 border-dashed rounded-xl">
-            No hay patentes. Hacé clic en "Agregar" para empezar.
-          </p>
-        )}
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {patentes?.map((p) => (
+          // {Array.isArray(patentes) && patentes.length > 0 ?
+          <div className="border p-3 rounded-md shadow-md" key={p._id}>
+            <h2 className="font-bold text-2xl uppercase">{p.domain}</h2>
+            <p className="text-zinc-500 text-xl">{p.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

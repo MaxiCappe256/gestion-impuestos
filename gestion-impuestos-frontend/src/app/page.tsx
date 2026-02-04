@@ -1,8 +1,8 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center">
       <h1 className="text-4xl font-bold mb-4">
         Gestión de Impuestos y Patentes
       </h1>
@@ -10,7 +10,7 @@ export default function Home() {
         Bienvenido al sistema de administración de vehículos e impuestos.
       </p>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-4">
         <Link
           href="/patentes"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
